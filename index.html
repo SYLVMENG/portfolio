@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yishuang Meng</title>
+<meta name="description" content="Yishuang (Sylvia) Meng, Master of Business Analytics candidate at Schulich. Demand forecasting, pricing, inventory and customer analytics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+
+/* Layout: one column, left-aligned editorial flow; hero pairs the pitch with a live-looking "coverage board" (her inventory work), projects in a 2-col grid of instrument-panel cards. */
+:root{
+  --bg:#f4f7f6; --surface:#ffffff; --ink:#13232b; --muted:#5a6b70; --line:#dbe3e1;
+  --accent:#0d7a6b; --accent-soft:#d6ece7; --amber:#b7791f; --amber-soft:#f6e7cc; --red:#b4473b; --red-soft:#f4dcd7; --slate:#8a9a9e;
+  --display:"Bricolage Grotesque","Inter",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1719; --surface:#162124; --ink:#e4ecea; --muted:#9aaaa9; --line:#26363a;
+  --accent:#3fbfa9; --accent-soft:#163a35; --amber:#e0a84e; --amber-soft:#3a2d17; --red:#e07b6c; --red-soft:#3d221e; --slate:#6f8084; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1719; --surface:#162124; --ink:#e4ecea; --muted:#9aaaa9; --line:#26363a;
+  --accent:#3fbfa9; --accent-soft:#163a35; --amber:#e0a84e; --amber-soft:#3a2d17; --red:#e07b6c; --red-soft:#3d221e; --slate:#6f8084; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+.eyebrow{font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+.mono{font-family:var(--mono)}
+
+/* nav */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
+.brand{font:700 18px/1 var(--display);color:var(--ink);text-decoration:none;margin-right:auto}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+nav a:hover{color:var(--ink)}
+.theme{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;width:34px;height:34px;display:grid;place-items:center;cursor:pointer}
+@media (max-width:640px){nav{display:none}}
+
+/* hero */
+.hero{padding-block:64px 40px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero>*{min-width:0}
+.hero h1{font-size:clamp(36px,5.4vw,58px);line-height:1.04;font-weight:700;margin-block:14px 18px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:18px;color:var(--muted);max-width:34em;margin:0 0 26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.ghost{color:var(--ink)}
+.board{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.board-head b{font:600 14px/1.3 var(--body)}
+.board-head span{font:400 11px/1 var(--mono);color:var(--muted)}
+.rule{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px dashed var(--line);font-size:14px}
+.pill{font:500 11px/1 var(--mono);padding:5px 8px;border-radius:999px;white-space:nowrap}
+.p-red{background:var(--red-soft);color:var(--red)}.p-amber{background:var(--amber-soft);color:var(--amber)}
+.p-green{background:var(--accent-soft);color:var(--accent)}.p-slate{background:var(--line);color:var(--muted)}
+.rule .cond{font:400 12px/1 var(--mono);color:var(--muted)}
+.board-foot{margin-top:12px;font-size:12px;color:var(--muted)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;padding-block:40px 24px}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line);margin-block:8px 8px}
+.stat{padding:22px 18px 22px 0;min-width:0}
+.stat+.stat{padding-left:18px;border-left:1px solid var(--line)}
+.stat b{display:block;font:700 30px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+@media (max-width:720px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0;padding-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* sections */
+section{padding-block:72px 8px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(28px,3.6vw,38px);margin-top:10px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:500 13px/1 var(--body);padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* project cards */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.viz{background:var(--bg);border-bottom:1px solid var(--line);padding:18px 20px;height:170px;display:flex;align-items:center}
+.viz svg{width:100%;height:100%;overflow:visible}
+.viz text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.viz .big{font-size:13px;fill:var(--ink);font-weight:500}
+.card-body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.meta{display:flex;justify-content:space-between;gap:10px;font:400 12px/1.3 var(--mono);color:var(--muted)}
+.card h3{font-size:21px;line-height:1.2}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.result{font:500 13px/1.5 var(--mono);color:var(--ink);background:var(--accent-soft);border-radius:6px;padding:8px 10px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.tag{font:400 11.5px/1 var(--mono);padding:5px 8px;border:1px solid var(--line);border-radius:5px;color:var(--muted)}
+.gh{font:500 13px/1 var(--body);color:var(--accent);text-decoration:none;padding-top:4px}
+.gh:hover{text-decoration:underline}
+.gh.off{color:var(--muted);font-weight:400}
+.card.wide{grid-column:1/-1;flex-direction:row}
+.card.wide .viz{flex:0 0 42%;height:auto;border-bottom:0;border-right:1px solid var(--line)}
+@media (max-width:760px){.card.wide{flex-direction:column}.card.wide .viz{height:170px;border-right:0;border-bottom:1px solid var(--line)}}
+.badge{font:500 11px/1 var(--mono);padding:4px 7px;border-radius:4px;background:var(--amber-soft);color:var(--amber);white-space:nowrap}
+
+/* experience */
+.xp{display:grid;gap:0}
+.job{display:grid;grid-template-columns:200px 1fr;gap:28px;padding-block:26px;border-top:1px solid var(--line)}
+.job>*{min-width:0}
+.job .when{font:400 13px/1.5 var(--mono);color:var(--muted)}
+.job h3{font-size:20px}
+.job .org{color:var(--accent);font-weight:600;font-size:15px;margin:2px 0 10px}
+.job ul{margin:0;padding-left:18px;color:var(--muted);max-width:44em}
+.job li+li{margin-top:6px}
+@media (max-width:680px){.job{grid-template-columns:1fr;gap:6px}}
+
+/* skills + edu */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--surface);min-width:0}
+.panel h3{font-size:17px;margin-bottom:12px}
+.panel dl{margin:0;display:grid;gap:12px}
+.panel dt{font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:5px}
+.panel dd{margin:0;color:var(--muted);font-size:15px}
+.edu{display:grid;gap:18px}
+.edu b{display:block;font-weight:600}
+.edu span{display:block;color:var(--muted);font-size:14px}
+.edu .yr{font:400 12px/1 var(--mono);color:var(--muted);margin-top:4px}
+
+/* contact */
+.contact{margin-block:72px 0;padding-block:44px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start}
+.contact>*{min-width:0}
+.contact h2{font-size:clamp(28px,3.6vw,38px);margin-top:10px}
+.contact p{color:var(--muted);max-width:32em}
+.links{display:grid;gap:10px}
+.link{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+.link span{font:400 12px/1 var(--mono);color:var(--muted);white-space:nowrap}
+.copy{border:0;background:none;color:var(--accent);font:500 12px/1 var(--mono);cursor:pointer;padding:4px}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+footer{padding-block:24px 40px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Yishuang Meng</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="theme" id="themeBtn" type="button" aria-label="Switch light or dark theme">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Data &amp; business analytics · Toronto</div>
+      <h1>From messy data to <em>decisions people can act on.</em></h1>
+      <p class="lede">I'm Sylvia (Yishuang) Meng, a Master of Business Analytics candidate at the Schulich School of Business with a statistics degree from McMaster. I clean and join data from many sources, build models in Python, SQL, Excel and Power BI, and check that a result holds up out of sample before anyone acts on it.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See projects</a>
+        <a class="btn ghost" href="Yishuang_Meng_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      </div>
+    </div>
+    <aside class="board" aria-label="How I work with data">
+      <div class="board-head"><b>How I work with data</b><span>examples from my projects</span></div>
+      <div class="rule"><span class="pill p-slate">Clean</span><span>Reconcile files, dates and keys from different systems</span><span class="cond">Power Query · pandas</span></div>
+      <div class="rule"><span class="pill p-slate">Explore</span><span>Check distributions and find what looks wrong first</span><span class="cond">SQL · EDA</span></div>
+      <div class="rule"><span class="pill p-green">Model</span><span>Forecasting, choice, clustering, survival</span><span class="cond">Python · R</span></div>
+      <div class="rule"><span class="pill p-amber">Validate</span><span>Out-of-sample tests, no look-ahead, stability checks</span><span class="cond">rolling origin</span></div>
+      <div class="rule"><span class="pill p-green">Decide</span><span>Turn results into prices, orders and customer actions</span><span class="cond">Power BI · Excel</span></div>
+      <div class="board-foot">Every project below follows these steps.</div>
+    </aside>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>~40%</b><span>sales growth I contributed to via new retail channels</span></div>
+    <div class="stat"><b>16,000+</b><span>store-SKU records in one control tower</span></div>
+    <div class="stat"><b>12,000+</b><span>orders costed in a cost-to-serve model</span></div>
+    <div class="stat"><b>8,950</b><span>card holders segmented into 4 groups</span></div>
+  </div>
+
+  <section id="projects">
+    <div class="sec-head">
+      <div><div class="eyebrow">Selected work</div><h2>Projects</h2></div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="python" aria-pressed="false">Python</button>
+        <button class="chip" type="button" data-f="sql" aria-pressed="false">SQL</button>
+        <button class="chip" type="button" data-f="excel" aria-pressed="false">Excel &amp; Power BI</button>
+        <button class="chip" type="button" data-f="ml" aria-pressed="false">Modeling</button>
+      </div>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <article class="card" data-tags="python ml">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Expected profit: $0.23M with baseline prices, $0.82M with optimized plan">
+            <line x1="0" y1="110" x2="320" y2="110" stroke="var(--line)"/>
+            <rect x="60" y="86.6" width="70" height="23.4" fill="var(--slate)"/>
+            <rect x="170" y="26.4" width="70" height="83.6" fill="var(--accent)"/>
+            <text class="big" x="95" y="80" text-anchor="middle">$0.23M</text>
+            <text class="big" x="205" y="20" text-anchor="middle">$0.82M</text>
+            <text x="95" y="126" text-anchor="middle">baseline prices</text>
+            <text x="205" y="126" text-anchor="middle">optimized plan</text>
+            <text x="0" y="14">simulated expected profit</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Forecasting · Optimization</span><span>Oct 2026</span></div>
+          <h3>Bike demand forecasting, pricing and capacity planning</h3>
+          <p>Forecast bi-weekly demand with a rolling-origin regression, modelled which of three bikes a customer picks with a multinomial logit, then set capacity and prices in two stages using only data available at each decision date.</p>
+          <div class="result">MAE −17% vs seasonal naive · 88% out-of-sample choice accuracy</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">Choice model</span><span class="tag">Optimization</span><span class="tag">Django</span></div>
+        <a class="gh" href="https://github.com/SYLVMENG/portfolio/tree/main/projects/01-bike-demand-pricing" target="_blank" rel="noopener">Write-up on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="excel">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Recommended action for 150 customers: keep 97, renegotiate 18, move to online 24, let go 11">
+            <text x="0" y="22">150 customers by recommended action</text>
+            <rect x="0" y="40" width="206.9" height="34" fill="var(--accent)"/>
+            <rect x="206.9" y="40" width="38.4" height="34" fill="var(--amber)"/>
+            <rect x="245.3" y="40" width="51.2" height="34" fill="var(--slate)"/>
+            <rect x="296.5" y="40" width="23.5" height="34" fill="var(--red)"/>
+            <text class="big" x="8" y="62" style="fill:var(--surface)">Keep 97</text>
+            <text x="0" y="100"><tspan fill="var(--amber)">■</tspan> Renegotiate 18  <tspan fill="var(--slate)">■</tspan> Move online 24  <tspan fill="var(--red)">■</tspan> Let go 11</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Team project · BI</span><span>Oct 2026</span></div>
+          <h3>Cost-to-serve customer profitability</h3>
+          <p>Combined picking, delivery, returns and service-call files in Power Query and allocated each cost pool to orders by its driver. Step-rated delivery and picking costs show which high-margin customers actually lose money.</p>
+          <div class="result">VBA Goal Seek finds each customer's break-even order size</div>
+          <div class="tags"><span class="tag">Excel</span><span class="tag">Power Query</span><span class="tag">VBA</span><span class="tag">Power BI</span><span class="tag">Dimensional model</span></div>
+        <a class="gh" href="https://github.com/SYLVMENG/portfolio/tree/main/projects/03-cost-to-serve" target="_blank" rel="noopener">Write-up on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="python ml">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Segment shares: cash-advance revolvers 33%, active spenders 27%, instalment buyers 23%, low activity 17%">
+            <g font-family="var(--mono)">
+              <text x="0" y="20">Cash-advance revolvers</text><rect x="150" y="10" width="112" height="14" fill="var(--accent)"/><text class="big" x="268" y="21">33%</text>
+              <text x="0" y="50">Active spenders</text><rect x="150" y="40" width="91.8" height="14" fill="var(--accent)" opacity=".8"/><text class="big" x="247" y="51">27%</text>
+              <text x="0" y="80">Instalment buyers</text><rect x="150" y="70" width="78.2" height="14" fill="var(--accent)" opacity=".62"/><text class="big" x="234" y="81">23%</text>
+              <text x="0" y="110">Low activity</text><rect x="150" y="100" width="57.8" height="14" fill="var(--accent)" opacity=".45"/><text class="big" x="214" y="111">17%</text>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Machine learning · Segmentation</span><span>Nov 2026</span></div>
+          <h3>Credit card customer segmentation</h3>
+          <p>Built 16 behavioural features for 8,950 card holders and compared K-Means, hierarchical, Gaussian mixture and DBSCAN. The four K-Means segments held up under bootstrap resampling and map to different marketing offers.</p>
+          <div class="result">Bootstrap stability ARI 0.98 · 4 segments</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Clustering</span><span class="tag">PCA</span></div>
+        <a class="gh" href="https://github.com/SYLVMENG/portfolio/tree/main/projects/02-credit-card-segmentation" target="_blank" rel="noopener">Write-up on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="python ml">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Average error in the reported test MSE over 50 seeds: minus 0.045 when the test set is used for tuning, about zero with proper cross-validation">
+            <text x="0" y="14">reported − true test MSE, avg of 50 seeds</text>
+            <line x1="160" y1="26" x2="160" y2="112" stroke="var(--line)"/>
+            <text x="160" y="126" text-anchor="middle">0</text>
+            <rect x="70" y="40" width="90" height="22" fill="var(--red)"/>
+            <text class="big" x="64" y="56" text-anchor="end">−0.045</text>
+            <text x="168" y="56">tuned on test set</text>
+            <rect x="158" y="78" width="4" height="22" fill="var(--accent)"/>
+            <text class="big" x="152" y="94" text-anchor="end">≈ 0</text>
+            <text x="168" y="94">cross-validated</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Model validation</span><span>Nov 2026</span></div>
+          <h3>Leakage-safe model tuning and PCA trade-offs</h3>
+          <p>Measured how much a model looks better than it is when the test set is used for tuning, by repeating the experiment over 50 seeds. Then tested whether PCA actually helps a classifier and a ridge regression.</p>
+          <div class="result">Leaked tuning understates test error by 0.045 on average</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Cross-validation</span><span class="tag">PCA</span></div>
+          <a class="gh" href="https://github.com/SYLVMENG/portfolio/tree/main/projects/04-model-tuning-leakage-pca" target="_blank" rel="noopener">Write-up on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="python ml">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Backtest income: minus $109.5K with next-day execution, minus $209.5K with one basis point cost, plus $137K to $488K if the start is shifted 1 to 4 days">
+            <line x1="150" y1="18" x2="150" y2="122" stroke="var(--line)"/>
+            <text x="0" y="14">next-day execution</text><text class="big" x="320" y="14" text-anchor="end">−$110K</text>
+            <rect x="119.3" y="20" width="30.7" height="14" fill="var(--red)"/>
+            <text x="0" y="56">with 1 bp trading cost</text><text class="big" x="320" y="56" text-anchor="end">−$210K</text>
+            <rect x="91.3" y="62" width="58.7" height="14" fill="var(--red)"/>
+            <text x="0" y="98">start 1–4 days later</text><text class="big" x="320" y="98" text-anchor="end">+$137K to +$488K</text>
+            <rect x="188.4" y="104" width="98.3" height="14" fill="var(--accent)" opacity=".6"/>
+            <text x="150" y="130" text-anchor="middle">0</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Time series · Backtesting</span><span>Nov 2026</span></div>
+          <h3>Can a forecast time tech vs retail stocks?</h3>
+          <p>Backtested a five-day long/short strategy between a tech and a retail basket using ARIMA forecasts and next-day execution. The total swung from loss to gain just by moving the start date, so the forecast showed no reliable edge.</p>
+          <div class="result">95% interval −$1.36M to +$1.15M · 250 trades</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">ARIMA</span><span class="tag">Bootstrap</span></div>
+          <a class="gh" href="https://github.com/SYLVMENG/portfolio/tree/main/projects/05-tech-retail-long-short" target="_blank" rel="noopener">Write-up on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="python sql excel">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Flow: Excel, CSV and macro workbooks into a product table and a store-SKU fact table, then risk queries and a reallocation list">
+            <g>
+              <rect x="0" y="14" width="78" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="39" y="31" text-anchor="middle">Excel</text>
+              <rect x="0" y="52" width="78" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="39" y="69" text-anchor="middle">CSV</text>
+              <rect x="0" y="90" width="78" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="39" y="107" text-anchor="middle">Macro wb</text>
+              <path d="M80 27 L112 65 M80 65 L112 65 M80 103 L112 65" stroke="var(--slate)" fill="none"/>
+              <rect x="114" y="38" width="96" height="54" rx="4" fill="var(--accent-soft)" stroke="var(--accent)"/>
+              <text class="big" x="162" y="61" text-anchor="middle">store-SKU</text><text x="162" y="77" text-anchor="middle">fact table</text>
+              <path d="M212 65 L240 65" stroke="var(--slate)" fill="none"/>
+              <rect x="242" y="20" width="78" height="40" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="281" y="44" text-anchor="middle">risk SQL</text>
+              <rect x="242" y="70" width="78" height="40" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="281" y="94" text-anchor="middle">reallocate</text>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Work project · Supply chain</span><span>2026</span></div>
+          <h3>Inventory control tower</h3>
+          <p>Reshaped wide store-level workbooks for 7,700+ products into a product table and a store-SKU fact table, classified every store-SKU by days of coverage, and matched overstock to short stores under the same warehouse.</p>
+          <div class="result">16,000+ store-SKU records · prioritized action list</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">pandas</span><span class="tag">Dashboard</span></div>
+        <span class="gh off">Work project · data and code not public</span>
+        </div>
+      </article>
+
+      
+
+      <article class="card" data-tags="python">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Flow: Shopify sales, pricing and competitor data feed an AI analyst agent that writes product and campaign summaries">
+            <rect x="0" y="12" width="96" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="48" y="29" text-anchor="middle">Shopify sales</text>
+            <rect x="0" y="52" width="96" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="48" y="69" text-anchor="middle">pricing</text>
+            <rect x="0" y="92" width="96" height="26" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="48" y="109" text-anchor="middle">competitors</text>
+            <path d="M98 25 L128 65 M98 65 L128 65 M98 105 L128 65" stroke="var(--slate)" fill="none"/>
+            <circle cx="160" cy="65" r="30" fill="var(--accent-soft)" stroke="var(--accent)"/><text class="big" x="160" y="69" text-anchor="middle">agent</text>
+            <path d="M192 65 L222 65" stroke="var(--slate)" fill="none"/>
+            <rect x="224" y="40" width="96" height="50" rx="4" fill="var(--surface)" stroke="var(--line)"/><text x="272" y="61" text-anchor="middle">product &amp;</text><text x="272" y="76" text-anchor="middle">campaign notes</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Work project · AI automation</span><span>Feb–Mar 2026</span></div>
+          <h3>AI sales analyst agent</h3>
+          <p>Designed an agent with Claude Code and structured prompts that reads sales, pricing and competitor data, spots trends, compares products and writes short summaries for product selection and campaign planning.</p>
+          <div class="result">Structured summaries from Shopify sales, pricing and competitor data</div>
+          <div class="tags"><span class="tag">LLM agent</span><span class="tag">Prompt design</span><span class="tag">Shopify</span><span class="tag">Automation</span></div>
+        <span class="gh off">Work project · data and code not public</span>
+        </div>
+      </article>
+
+
+      <article class="card" data-tags="python ml">
+        <div class="viz">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Method sketch: survival curve with checkpoints at one, three and five years. No results yet.">
+            <line x1="20" y1="110" x2="310" y2="110" stroke="var(--line)"/>
+            <line x1="20" y1="10" x2="20" y2="110" stroke="var(--line)"/>
+            <path d="M20 14 H70 V24 H110 V36 H150 V44 H190 V56 H230 V62 H270 V70 H310" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <line x1="76" y1="12" x2="76" y2="110" stroke="var(--slate)" stroke-dasharray="3 3"/><text x="76" y="124" text-anchor="middle">1 yr</text>
+            <line x1="188" y1="12" x2="188" y2="110" stroke="var(--slate)" stroke-dasharray="3 3"/><text x="188" y="124" text-anchor="middle">3 yr</text>
+            <line x1="300" y1="12" x2="300" y2="110" stroke="var(--slate)" stroke-dasharray="3 3"/><text x="300" y="124" text-anchor="middle">5 yr</text>
+            <text x="310" y="96" text-anchor="end">method sketch, not results</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="meta"><span>Consulting project · team of 3</span><span class="badge">In progress</span></div>
+          <h3>Credit union member tenure and retention</h3>
+          <p>Estimating the chance a member is still active at one, three and five years from their first 90 days of behaviour, using Kaplan–Meier, Cox and tree-based survival models with leakage controls and right-censoring.</p>
+          <div class="result">Client: Filene Research Institute × Vertice AI</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Survival analysis</span><span class="tag">Feature engineering</span></div>
+        <span class="gh off">Client project · data and code not public</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><div><div class="eyebrow">Background</div><h2>Experience</h2></div></div>
+    <div class="xp">
+      <div class="job">
+        <div class="when">Jan 2026 – Present<br>Toronto, ON</div>
+        <div>
+          <h3>E-commerce &amp; Business Operations Analyst</h3>
+          <div class="org">PF Trading Inc</div>
+          <ul>
+            <li>Supported the move from the company's own Shopify store to Amazon, Walmart, Best Buy, Yami and HongMall, contributing to about a 40% increase in total sales.</li>
+            <li>Planned TikTok and Instagram content and reworked product listings from competitor research, lifting product page visibility and click-through by 32%.</li>
+            <li>Analyzed sell-through and slow-moving SKUs for restock, bundle and clearance plans, cutting slow-moving inventory by 15%.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">May 2026 – Present<br>Markham, ON</div>
+        <div>
+          <h3>Supply Chain Intern (part-time)</h3>
+          <div class="org">Kiokii and...</div>
+          <ul>
+            <li>Built a Python–SQL inventory control tower covering 7,700+ products and 16,000+ store-SKU records, with coverage-day risk classes and same-warehouse reallocation.</li>
+            <li>Prepare about 100 POs and intercompany orders a week and reconcile them against invoices, receiving records and SKU master data.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Mar 2024 – Sep 2025</div>
+        <div>
+          <h3>Business Marketing Analyst</h3>
+          <div class="org">Reiwatakiya</div>
+          <ul>
+            <li>Standardized monthly reporting with Excel templates, PivotTables and lookups, cutting reporting time by 25%.</li>
+            <li>Analyzed seasonal demand, AOV and discount usage in Shopify data, improving promotional sell-through by 10–15%.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Apr 2024 – Aug 2024</div>
+        <div>
+          <h3>Market Analysis Intern</h3>
+          <div class="org">China Post Life Insurance</div>
+          <ul>
+            <li>Built monthly KPI reports on premium income, budget progress, YoY growth and branch performance for management review.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><div><div class="eyebrow">Toolkit &amp; training</div><h2>Skills and education</h2></div></div>
+    <div class="two">
+      <div class="panel">
+        <h3>What I work with</h3>
+        <dl>
+          <div><dt>Code</dt><dd>Python (pandas, scikit-learn, statsmodels), SQL, R, SAS, Django, Git</dd></div>
+          <div><dt>Spreadsheet &amp; BI</dt><dd>Excel (Power Query, VBA, PivotTables, Goal Seek), Power BI, Tableau</dd></div>
+          <div><dt>Methods</dt><dd>Regression, time-series forecasting, choice models, survival analysis, clustering, PCA, optimization</dd></div>
+          <div><dt>Business</dt><dd>E-commerce operations, marketing analytics, inventory planning, KPI reporting, AI automation</dd></div>
+        </dl>
+      </div>
+      <div class="panel">
+        <h3>Education</h3>
+        <div class="edu">
+          <div><b>Master of Business Analytics</b><span>Schulich School of Business, York University</span><div class="yr">May 2026 – Present</div></div>
+          <div><b>BSc (Honours) Mathematics &amp; Statistics</b><span>McMaster University · Specialization in Statistics</span><div class="yr">Dec 2024</div></div>
+          <div><b>Certificates</b><span>Python for Everybody &amp; Python Data Structures (University of Michigan, 2024) · Python and Statistics for Financial Analysis (HKUST, 2025) · Financial Markets (Yale, 2025)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact" id="contact">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h2>Let's talk about analytics roles.</h2>
+      <p>I'm looking for analytics, supply chain and marketing analytics roles in Toronto. Project write-ups are on GitHub.</p>
+    </div>
+    <div class="links">
+      <div class="link"><span id="mail" style="font:500 15px/1.3 var(--body);color:var(--ink);white-space:normal">yishuang0625@hotmail.com</span><button class="copy" type="button" id="copyBtn">Copy</button></div>
+      <a class="link" href="https://www.linkedin.com/in/sylvia-meng-b961041aa/" target="_blank" rel="noopener">LinkedIn<span>sylvia-meng ↗</span></a>
+      <a class="link" href="https://github.com/SYLVMENG" target="_blank" rel="noopener">GitHub<span>SYLVMENG ↗</span></a>
+    </div>
+  </div>
+</main>
+
+<footer class="wrap">© 2026 Yishuang Meng. Company and client data are not published here; work projects are described without their data or code.</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  try{var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+  });
+  var chips=document.querySelectorAll('.chip'), cards=document.querySelectorAll('#grid .card');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});
+    var f=c.dataset.f; cards.forEach(function(k){k.hidden = !(f==='all' || k.dataset.tags.split(' ').indexOf(f)>-1);});
+  });});
+  var cb=document.getElementById('copyBtn');
+  cb.addEventListener('click',function(){
+    var t=document.getElementById('mail').textContent;
+    var done=function(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy';},1500);};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){selectMail();});}else selectMail();
+    function selectMail(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);}
+  });
+})();
+</script>
+
+</body>
+</html>
