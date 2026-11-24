@@ -3,7 +3,7 @@
 Live site: https://sylvmeng.github.io/portfolio/
 
 Data analytics projects in forecasting, pricing, customer segmentation, cost-to-serve and model validation.
-Each folder has a write-up of the problem, approach and results, with the key figures. Code is available on request.
+Each folder has a write-up of the problem, approach and results with key figures. Most also include the code, the Jupyter notebook and a rendered HTML version you can read in the browser.
 
 | Project | What it shows | Tools |
 |---|---|---|

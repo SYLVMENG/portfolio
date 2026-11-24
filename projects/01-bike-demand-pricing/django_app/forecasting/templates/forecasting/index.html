@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bike demand, pricing and capacity</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    .table { border-collapse: collapse; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .table th, .table td { border: 1px solid #ccc; padding: 4px 8px; text-align: right; }
+  </style>
+</head>
+<body>
+  <h1>Bike demand forecasting, pricing and capacity planning</h1>
+  <h2>Forecast: Model selection on the validation year (MAE)</h2>
+  {{ validation|safe }}
+  <h2>Forecast: Rolling-origin test results by horizon</h2>
+  {{ q1|safe }}
+  <h2>Choice model: Choice probabilities at the given prices (all data and training data)</h2>
+  {{ q2|safe }}
+  <h2>Choice model: Rolling out-of-sample check</h2>
+  {{ q2_oos|safe }}
+  <h2>Choice model: Transactions vs bikes</h2>
+  {{ units|safe }}
+  <h2>Capacity and pricing: Accuracy of the lag-5 and lag-2 forecasts</h2>
+  {{ forecast_eval|safe }}
+  <h2>Capacity and pricing: Two-stage plan for the test year (base case)</h2>
+  {{ plan|safe }}
+  <h2>Capacity and pricing: Optimized prices vs fixed baseline prices</h2>
+  {{ comparison|safe }}
+  <h2>Capacity and pricing: Estimation check: rolling vs fixed training parameters</h2>
+  {{ estimation_check|safe }}
+  <h2>Capacity and pricing: Error-sample sensitivity (two-way split)</h2>
+  {{ holdout|safe }}
+  <h2>Capacity and pricing: Grid convergence of the capacity decision</h2>
+  {{ grid_check|safe }}
+  {{ dense_check|safe }}
+  <h2>Capacity and pricing: One-way sensitivity analysis</h2>
+  {{ sensitivity|safe }}
+</body>
+</html>

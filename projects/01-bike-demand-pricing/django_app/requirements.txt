@@ -1,0 +1,6 @@
+django>=5.0
+pandas
+numpy
+statsmodels
+scipy
+matplotlib
